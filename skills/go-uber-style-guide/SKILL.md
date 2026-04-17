@@ -1,6 +1,6 @@
 ---
-name: go-guidelines
-description: Apply the Uber Go Style Guide section-by-section when writing, reviewing, refactoring, or debugging Go code. Use for interfaces, receivers, error handling, goroutine lifecycle, performance rules, style consistency, testing patterns, and linting.
+name: go-uber-style-guide
+description: Apply the Uber Go Style Guide section-by-section when writing, reviewing, refactoring, or debugging Go code.
 ---
 
 # Go Guidelines (Uber-Based)
@@ -24,9 +24,6 @@ If version is `unknown`:
 
 - Use only Uber's Go Style Guide as the style source for this skill.
 - If repository-local conventions conflict with Uber style, follow repository-local conventions and call out the conflict.
-
-Primary source:
-- https://github.com/uber-go/guide/blob/master/style.md
 
 ## How to Apply This Skill
 
@@ -54,4 +51,3 @@ scripts/run_uber_checks.sh ./...
 | Choosing linters and runner defaults | [references/07-linting.md](references/07-linting.md) |
 
 Multiple references may apply.
-
