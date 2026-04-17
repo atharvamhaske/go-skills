@@ -1,93 +1,91 @@
 # Go Guidelines for Code Agents
 
-An open-source maintained Go skill pack that teaches AI code agents how to write **production-grade Go**.
+An open-source skill pack that teaches AI code agents to apply **Uber Go Style Guide** conventions.
 
-This repository is built on top of the **Uber Go Style Guide** and is designed to plug into any harness/runtime that supports `SKILL.md`, `skills.md`, or `AGENTS.md`.
+Drop it into Cursor, Claude Code, or any custom harness and enforce section-by-section Go rules consistently.
 
 ## Motivation
 
-Most coding agents still generate outdated or risky Go patterns in real projects. Common issues:
+Agents often produce Go code that is inconsistent or operationally risky:
 
-1. **Inconsistent style decisions.** Different prompts produce different naming, initialization, and error patterns.
-2. **Weak operational safety.** Goroutine lifecycle, `init()` usage, and shutdown behavior are often mishandled.
-3. **Low performance hygiene.** Agents skip capacity planning, overuse slower conversion patterns, or allocate unnecessarily in hot paths.
-4. **No lifecycle guardrails.** Fire-and-forget goroutines and hidden mutable globals frequently slip in.
-5. **Missing post-change validation.** Agents often skip lint and vet checks after code changes.
+1. **Style drift:** same codebase, different prompts, different conventions.
+2. **Lifecycle mistakes:** uncontrolled goroutines, poor shutdown flow, misuse of `init()`.
+3. **Weak error strategy:** mixed wrapping/matching rules and duplicated error handling.
+4. **Performance misses:** no capacity hints, unnecessary conversion overhead in hot paths.
+5. **No validation loop:** lint/vet/race checks skipped after changes.
 
-This skill pack fixes that by giving agents an explicit Uber-aligned reference workflow with focused rule files and reusable check scripts.
+This repo addresses these with a folder-wise Uber-based rule system.
 
 ## What the Agent Learns
 
 | | |
 |---|---|
-| **Core Guidelines** | Interfaces, receivers, mutex usage, slice/map boundaries, `init()` rules, goroutine lifecycle, process exit discipline |
-| **Error Handling** | Error construction strategy, wrapping with `%w`, naming, and handle-once principles |
-| **Performance** | `strconv` over `fmt` in hot paths, conversion reuse, map/slice capacity planning |
-| **Style** | Import grouping, naming, initialization conventions, scope reduction, readability consistency |
-| **Patterns** | Table-driven tests, parallel subtest safety, functional options for public APIs |
-| **Linting** | Baseline linter set and `golangci-lint`-first workflow |
-| **Post-Change** | Scripted checks via `scripts/run_uber_checks.sh` with `go vet` fallback flow |
+| **Introduction** | How and why to apply style conventions as maintainability contracts |
+| **Guidelines** | Interfaces, receivers, mutexes, boundaries, defer, channels, enums, time, init, exits, goroutine lifecycle |
+| **Errors** | Error type strategy, `%w` wrapping, naming, handle-once principle |
+| **Performance** | `strconv` over `fmt`, conversion reuse, map/slice capacity planning |
+| **Style** | Import grouping, naming, declaration organization, initialization rules, scoping and readability |
+| **Patterns** | Table tests, parallel subtest safety, functional options |
+| **Linting** | Baseline linter set and `golangci-lint` runner guidance |
+| **Post-Change** | `run_uber_checks.sh` for lint/vet + race test flow |
 
 ## File Structure
 
 ```text
 go-skills/
+├── .claude-plugin/
+│   └── marketplace.json
+├── claude/
+│   └── go-guidelines/
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       └── skills/
+│           └── go-guidelines/
+│               ├── SKILL.md
+│               ├── references/
+│               │   ├── 01-introduction.md
+│               │   ├── 02-guidelines.md
+│               │   ├── 03-errors.md
+│               │   ├── 04-performance.md
+│               │   ├── 05-style.md
+│               │   ├── 06-patterns.md
+│               │   └── 07-linting.md
+│               └── scripts/
+│                   ├── detect_go_version.sh
+│                   └── run_uber_checks.sh
 ├── AGENTS.md
 ├── skills.md
-├── CONTRIBUTING.md
-└── skills/
-    └── go-uber-style-guide/
-        ├── SKILL.md
-        ├── agents.md
-        ├── skills.md
-        ├── agents/
-        │   └── openai.yaml
-        ├── references/
-        │   ├── guidelines-core.md
-        │   ├── error-handling.md
-        │   ├── performance.md
-        │   ├── style.md
-        │   ├── patterns.md
-        │   └── linting.md
-        └── scripts/
-            ├── detect_go_version.sh
-            └── run_uber_checks.sh
+└── CONTRIBUTING.md
 ```
 
-`SKILL.md` is the entrypoint, and references are loaded by topic so agents can stay context-efficient.
+Only `SKILL.md` is the entrypoint. Reference files are loaded on-demand by topic.
 
 ## Installation
 
-### Cursor (project local)
+### Cursor
 
 ```bash
-cp -r skills/go-uber-style-guide <your-project>/.cursor/skills/go-uber-style-guide
+cp -r claude/go-guidelines/skills/go-guidelines <your-project>/.cursor/skills/go-guidelines
 ```
 
-### Codex / Claude Code style local skills
+### Claude Code / Codex local skills
 
 ```bash
-cp -r skills/go-uber-style-guide "${CODEX_HOME:-$HOME/.codex}/skills/go-uber-style-guide"
+cp -r claude/go-guidelines/skills/go-guidelines "${CODEX_HOME:-$HOME/.codex}/skills/go-guidelines"
 ```
 
 ### Any custom harness
 
-Load one of these files as the entrypoint based on your runtime:
+Use this as the canonical entrypoint:
 
-- `skills/go-uber-style-guide/SKILL.md`
-- `skills/go-uber-style-guide/skills.md`
-- `skills/go-uber-style-guide/agents.md`
+- `claude/go-guidelines/skills/go-guidelines/SKILL.md`
 
 ## Source Attribution
 
-This repository is built on top of the Uber guide:
+Built on top of the Uber guide:
 
 - https://github.com/uber-go/guide/blob/master/style.md
 
 ## Contributing
 
-PRs are welcome.
-
-If you have custom rules, harness-specific integrations, or new skill packs, open a Pull Request.
-
-For updates to `go-uber-style-guide`, keep guidance aligned with the Uber Go Style Guide policy in `CONTRIBUTING.md`.
+PRs are welcome. For custom rules and harness integrations, open a PR with focused changes.

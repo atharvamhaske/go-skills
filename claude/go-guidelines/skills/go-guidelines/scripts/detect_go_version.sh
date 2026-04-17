@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Print the most common Go version declared in go.mod files.
-# Prints "unknown" when no go.mod with a version line is found.
-
 versions=""
 
 if command -v rg >/dev/null 2>&1; then

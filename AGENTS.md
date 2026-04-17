@@ -1,14 +1,19 @@
 # go-skills
 
-Repository-level agent entrypoint.
+Repository-level AGENTS entrypoint.
 
-Use:
+## Canonical Go Skill
 
-- `skills/go-uber-style-guide/SKILL.md` for skill-aware runtimes
-- `skills/go-uber-style-guide/agents.md` for AGENTS-style runtimes
-- `skills/go-uber-style-guide/skills.md` for lowercase skills.md runtimes
+- Name: `go-guidelines`
+- Entry file: `claude/go-guidelines/skills/go-guidelines/SKILL.md`
 
-Primary source for this pack:
+## Execution Guidance
+
+1. Detect Go version via `scripts/detect_go_version.sh`.
+2. Load only relevant references for the current task.
+3. Apply Uber section rules directly.
+4. Run `scripts/run_uber_checks.sh <package-pattern>`.
+
+## Source
 
 - Uber Go Style Guide: https://github.com/uber-go/guide/blob/master/style.md
-

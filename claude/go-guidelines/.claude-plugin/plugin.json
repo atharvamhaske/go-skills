@@ -1,0 +1,9 @@
+{
+  "name": "go-guidelines",
+  "description": "Uber-guide-based Go coding guidelines for AI agents.",
+  "version": "1.1.0",
+  "author": {
+    "name": "atharvamhaske"
+  },
+  "keywords": ["go", "golang", "uber-go-guide", "agent-skills", "guidelines"]
+}

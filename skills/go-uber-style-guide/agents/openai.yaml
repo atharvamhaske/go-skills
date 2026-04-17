@@ -1,4 +1,0 @@
-interface:
-  display_name: "Go Uber Style Guide"
-  short_description: "Help with Go Uber Style Guide tasks"
-  default_prompt: "Use $go-uber-style-guide to apply Uber Go style guide rules when writing, reviewing, or refactoring Go code."

@@ -25,5 +25,4 @@ Thanks for helping improve this project.
 
 ## Rule source policy
 
-For `go-uber-style-guide`, keep guidance aligned to the Uber Go Style Guide unless explicitly introducing a new skill with a different source policy.
-
+For `claude/go-guidelines/skills/go-guidelines`, keep guidance aligned to the Uber Go Style Guide unless explicitly introducing a new skill with a different source policy.

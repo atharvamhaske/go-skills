@@ -1,0 +1,20 @@
+{
+  "name": "go-skills-marketplace",
+  "owner": {
+    "name": "atharvamhaske"
+  },
+  "metadata": {
+    "description": "Marketplace manifest for go-skills",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "go-guidelines",
+      "description": "Uber-guide-based Go coding guidelines for AI agents.",
+      "author": {
+        "name": "atharvamhaske"
+      },
+      "source": "./claude/go-guidelines"
+    }
+  ]
+}
